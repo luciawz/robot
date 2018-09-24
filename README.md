@@ -30,7 +30,7 @@ LEFT and RIGHT will rotate the robot 90 degrees in the specified direction witho
 
 REPORT will announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient.
 
-A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT and REPORT commands.
+A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands.
 
 Input can be from a file, or from standard input, as the developer chooses.
 
