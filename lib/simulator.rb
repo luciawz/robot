@@ -13,9 +13,13 @@ class Simulator
   def execute(line)
     return nil if line.strip.empty?
     tokens = line.split(/\s+/)
-    operator = tokens.first
-    arguments = tokens.last
-    execute_command(operator, arguments)
+    fail 'Please input PLACE command first to init.' unless tokens.first == "PLACE"
+    tokens.each_with_index do |token, index|
+      operator = token
+      (token == "PLACE") ? arguments = tokens[index + 1] : arguments = nil
+      output = execute_command(operator, arguments)
+      puts output if operator.chomp == 'REPORT'
+    end
   end
 
   def execute_command(operator, arguments)
@@ -30,8 +34,6 @@ class Simulator
       left
     when 'RIGHT'
       right
-    else
-      'Invalid command line agrument #{command}'
     end
   end
 
@@ -45,7 +47,7 @@ class Simulator
   end
 
   def report
-    @robot.position_to_s + ',' + @robot.to_s unless @robot.position.nil? && @robot.facing.nil?
+    @robot.position_to_s + ',' + @robot.facing.to_s.upcase unless @robot.position.nil? && @robot.facing.nil?
   end
 
   def left
