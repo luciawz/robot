@@ -6,5 +6,5 @@ robot_commands = File.readlines('command.txt')
 simulator = Simulator.new
 
 robot_commands.each do | command |
-  simulator.execute(command)
+  puts simulator.execute(command)
 end

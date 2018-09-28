@@ -50,7 +50,7 @@ describe 'Simulator' do
     context 'with left command' do
       describe 'before place command' do
         it 'does nothing' do
-          expect(simulator.execute('LEFT')).to eq nil
+          expect { simulator.execute('LEFT')}.to raise_error RuntimeError
         end
       end
     end
@@ -58,7 +58,7 @@ describe 'Simulator' do
     context 'with right command' do
       describe 'before place command' do
         it 'does nothing' do
-          expect(simulator.execute('RIGHT')).to eq nil
+          expect { simulator.execute('RIGHT')}.to raise_error RuntimeError
         end
       end
     end
@@ -66,7 +66,7 @@ describe 'Simulator' do
     context 'with report command' do
       describe 'before place command' do
         it 'does nothing' do
-          expect(simulator.execute('REPORT')).to eq nil
+          expect { simulator.execute('REPORT')}.to raise_error RuntimeError
         end
       end
     end
@@ -100,11 +100,8 @@ describe 'Simulator' do
 
   describe '#move' do
     context 'when robot is placed on table' do
-      before do
-        simulator.execute('PLACE 0,0,NORTH')
-      end
       it 'allows you to move north' do
-        simulator.execute('MOVE')
+        simulator.execute('PLACE 0,0,NORTH MOVE')
         expect(simulator.robot.position.x_coordinate).to eq 0
         expect(simulator.robot.position.y_coordinate).to eq 1
       end
@@ -113,29 +110,23 @@ describe 'Simulator' do
 
   describe '#left' do
     context 'when robot is placed on table' do
-      before :each do
-        simulator.execute('PLACE 0,0,NORTH')
-      end
       it 'change the direction to west' do
-        simulator.execute('LEFT')
+        simulator.execute('PLACE 0,0,NORTH LEFT')
         expect(simulator.robot.facing).to eq :west
       end
 
       it 'change the direction to south' do
-        simulator.robot.update_direction :west
-        simulator.execute('LEFT')
+        simulator.execute('PLACE 0,0,WEST LEFT')
         expect(simulator.robot.facing).to eq :south
       end
 
       it 'change the direction to east' do
-        simulator.robot.update_direction :south
-        simulator.execute('LEFT')
+        simulator.execute('PLACE 0,0,SOUTH LEFT')
         expect(simulator.robot.facing).to eq :east
       end
 
       it 'change the direction to south' do
-        simulator.robot.update_direction :east
-        simulator.execute('LEFT')
+        simulator.execute('PLACE 0,0,EAST LEFT')
         expect(simulator.robot.facing).to eq :north
       end
     end
@@ -143,29 +134,23 @@ describe 'Simulator' do
 
   describe '#right' do
     context 'when robot is placed on table' do
-      before :each do
-        simulator.execute('PLACE 0,0,NORTH')
-      end
       it 'change the direction to east' do
-        simulator.execute('RIGHT')
+        simulator.execute('PLACE 0,0,NORTH RIGHT')
         expect(simulator.robot.facing).to eq :east
       end
 
       it 'change the direction to south' do
-        simulator.robot.update_direction :east
-        simulator.execute('RIGHT')
+        simulator.execute('PLACE 0,0,EAST RIGHT')
         expect(simulator.robot.facing).to eq :south
       end
 
       it 'change the direction to east' do
-        simulator.robot.update_direction :south
-        simulator.execute('RIGHT')
+        simulator.execute('PLACE 0,0,SOUTH RIGHT')
         expect(simulator.robot.facing).to eq :west
       end
 
       it 'change the direction to south' do
-        simulator.robot.update_direction :west
-        simulator.execute('RIGHT')
+        simulator.execute('PLACE 0,0,WEST RIGHT')
         expect(simulator.robot.facing).to eq :north
       end
     end
@@ -173,17 +158,14 @@ describe 'Simulator' do
 
   describe '#report' do
     context 'when robot is placed on table' do
-      before :each do
-        simulator.execute('PLACE 0,0,NORTH')
-      end
       it 'display the current position' do
-        expect(simulator.execute('REPORT')).to eq '0,0,NORTH'
+        expect(simulator.execute('PLACE 0,0,NORTH REPORT')).to eq '0,0,NORTH'
       end
     end
 
     context 'when robot is not on table' do
       it 'displays nothing' do
-        expect(simulator.execute('REPORT')).to be_nil
+        expect { simulator.execute('REPORT')}.to raise_error RuntimeError
       end
     end
   end

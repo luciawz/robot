@@ -13,13 +13,15 @@ class Simulator
   def execute(line)
     return nil if line.strip.empty?
     tokens = line.split(/\s+/)
+    outs = []
     fail 'Please input PLACE command first to init.' unless tokens.first == "PLACE"
     tokens.each_with_index do |token, index|
       operator = token
       (token == "PLACE") ? arguments = tokens[index + 1] : arguments = nil
       output = execute_command(operator, arguments)
-      puts output if operator.chomp == 'REPORT'
+      outs.push(output) if operator.chomp == 'REPORT'
     end
+    outs.length > 0 ? outs.join(" ") : nil
   end
 
   def execute_command(operator, arguments)
