@@ -1,7 +1,7 @@
 # Toy Robot Simulator challenge
 
 
-##Description:
+## Description:
 
 The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units
 There are no other obstructions on the table surface
@@ -38,16 +38,16 @@ Provide test data to exercise the application.
 
 Constraints: The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot. Any move that would cause the robot to fall must be ignored.
 
- 
+
 ## How to run
 Run the program with command below, the commands was written in command.txt:
 
 ```
-ruby robot_simulator.rb 
+ruby robot_simulator.rb
 ```
 
 
-##Example Input and Output:
+## Example Input and Output:
 
 a) PLACE 0,0,NORTH MOVE REPORT Output: 0,1,NORTH
 
