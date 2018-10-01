@@ -49,11 +49,31 @@ ruby robot_simulator.rb
 
 ## Example Input and Output:
 
-a) PLACE 0,0,NORTH MOVE REPORT Output: 0,1,NORTH
+```
+a) 
+PLACE 0,0,NORTH 
+MOVE 
+REPORT 
 
-b) PLACE 0,0,NORTH LEFT REPORT Output: 0,0,WEST
+Output: 0,1,NORTH
 
-c) PLACE 1,2,EAST MOVE MOVE LEFT MOVE REPORT Output: 3,3,NORTH
+b) 
+PLACE 0,0,NORTH 
+LEFT 
+REPORT 
+
+Output: 0,0,WEST
+
+c) 
+PLACE 1,2,EAST 
+MOVE 
+MOVE 
+LEFT 
+MOVE 
+REPORT 
+
+Output: 3,3,NORTH
+```
 
 Deliverables: The Ruby source files, the test data and any test code. It is not required to provide any graphical output showing the movement of the toy robot.  It would be very helpful if you could include a Readme file describing the application and how to use it.
 
